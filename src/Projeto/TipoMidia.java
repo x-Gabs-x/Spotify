@@ -10,17 +10,10 @@ public class TipoMidia {
 
     private static final List<String> GENEROS_MUSICA = Arrays.asList("Rock","POP","MPB","JAZZ","CLASSICA","SERTANEJO","FUNK","ELETRÔNICA");
 
-    public static boolean ValidarTipo(String tipo){
-        return tipo.equalsIgnoreCase(MUSICA) ||
-        tipo.equalsIgnoreCase(PODCAST) ||
-        tipo.equalsIgnoreCase(AUDIOBOOK);
-    }
     public static boolean ValidarGenero(String genero) {
         for (String generoLista : GENEROS_MUSICA) {
             if (generoLista.equalsIgnoreCase(genero)) {
                 return true;
-            } else {
-                System.out.println("Gênero inválido");
             }
         }
         return false;
