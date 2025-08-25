@@ -1,4 +1,5 @@
 package Projeto;
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -6,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Sistema sistema = new Sistema();
-
+        scanner.useLocale(Locale.US);
         boolean sair = false;
 
         sistema.cadUsuario(scanner);
