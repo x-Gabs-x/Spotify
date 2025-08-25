@@ -89,7 +89,7 @@ public class Sistema {
         }
 
         System.out.println("Informe o nome da mídia: ");
-        String nomeMusica = scanner.nextLine().trim();
+        String nomeMidia = scanner.nextLine().trim();
 
         System.out.println("Informe o nome do autor: ");
         String autorNome = scanner.nextLine().trim();
@@ -100,33 +100,45 @@ public class Sistema {
 
         System.out.println("------Escolha o tipo de mídia------");
         System.out.println("""
-        - Música
-        - Podcast
-        - AudioBook
+        1 - Música
+        2 - Podcast
+        3 - AudioBook
         """);
         System.out.println("Opção: ");
-        String TipoMidia = scanner.nextLine().trim();
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
 
-        if (!Projeto.TipoMidia.ValidarTipo(TipoMidia)){
-            System.out.println("Tipo Inválido!");
-            return;
-        }
-
+        String tipoSelecionado = null;
         String genero = null;
-        if (TipoMidia.equalsIgnoreCase(Projeto.TipoMidia.MUSICA)){
-            System.out.println("Escolha o gênero da Música: " + String.join(", ",Projeto.TipoMidia.getGenerosMusica()));
-            genero = scanner.nextLine().trim();
-        }
-        
-        if(!Projeto.TipoMidia.ValidarGenero(genero)){
-            System.out.println("Gênero Inválido");
-            return;
+
+        switch (opcao){
+            case 1:
+            tipoSelecionado = TipoMidia.MUSICA;
+                System.out.printf("Escolha o gênero da Música" + String.join("\n- ", Projeto.TipoMidia.getGenerosMusica()) + "\nOpção: ");
+                genero = scanner.nextLine().trim();
+
+                if(!TipoMidia.ValidarGenero(genero)){
+                    System.out.println("Erro: Gênero inválido");
+                    return;
+                }
+                break;
+            case 2:
+                tipoSelecionado = TipoMidia.PODCAST;
+                break;
+            case 3:
+                tipoSelecionado = TipoMidia.AUDIOBOOK;
+                break;
+
+            default:
+                System.out.println("Erro: Opção inválida!");
+                return;
         }
 
-        Midia novaMidia = new Midia(nomeMusica, autorNome, duracaoMusica);
+        Midia novaMidia = new Midia(nomeMidia, autorNome, duracaoMusica, tipoSelecionado, genero);
 
         playListAlvo.adicionarMidia(novaMidia);
-        System.out.printf("Música '%s' adicionada com sucesso!%n", nomeMusica);
+        System.out.printf("Música '%s' adicionada com sucesso!%n", nomeMidia);
+
     }
 
     public void removerMidia(Scanner scanner) {
